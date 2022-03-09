@@ -1,0 +1,122 @@
+            dices = [0,0,0,0,0]
+            for i in range(0,5):
+                dices[i] = random.randint(1,6)
+            filledList = []
+            for i in range(0,6):
+                #print(players[nextPlayer].sheet)
+                if players[currentPlayer].unfill_sheet(i) == False:
+                    #print(i)
+                    filledList.append((i+1))
+            num, freq = most_frequent(dices, filledList)
+            for i in range(0,5):
+                if num == 0:
+                    dices[i] = random.randint(1,6)
+                elif dices[i] != num:
+                    dices[i] = random.randint(1,6)
+            num, freq = most_frequent(dices, filledList)
+            for i in range(0,5):
+                if num == 0:
+                    dices[i] = random.randint(1,6)
+                elif dices[i] != num:
+                    dices[i] = random.randint(1,6)
+            num, freq = most_frequent(dices, filledList)
+            #print(num, freq)
+            if players[currentPlayer].unfill_sheet((num-1)):
+                players[currentPlayer].add_score(num*freq,(num-1))
+            #2. player 2
+
+
+            for i in range(0,5):
+                dices[i] = random.randint(1,6)
+            filledList = []
+            for i in range(0,6):
+                #print(players[nextPlayer].sheet)
+                if players[nextPlayer].unfill_sheet(i) == True:
+                    #print(i)
+                    filledList.append((i+1))
+            num, freq = select(dices, filledList)
+            for i in range(0,5):
+                if num == 0:
+                    dices[i] = random.randint(1,6)
+                elif dices[i] != num:
+                    dices[i] = random.randint(1,6)
+            num, freq = select(dices, filledList)
+            for i in range(0,5):
+                if num == 0:
+                    dices[i] = random.randint(1,6)
+                elif dices[i] != num:
+                    dices[i] = random.randint(1,6)
+            num, freq = select(dices, filledList)
+            #print(num, freq)
+            countTwo = 0 
+            players[nextPlayer].add_score(num*freq,(num-1))
+            round = round + 1
+
+
+
+num = 0
+    for i in [5,4,3,2,1,0]:
+        if players[player].unfill_sheet(i):
+            num = i + 1
+            break
+    #reroll twice
+    for i in range(0,5):
+        if dices[i] != num:
+            dices[i] = random.randint(1,6)
+
+    for i in range(0,5):
+        if dices[i] != num:
+            dices[i] = random.randint(1,6)
+    #print(dices)
+    sumDice = 0
+    countDice = 0
+    #print(dices)
+    for i in range(0,5):
+        #print(dice)
+        if dices[i] == num:
+            sumDice += dices[i]
+            countDice += 1
+    #print(sumDice)
+    if (num in [5,6] and countDice <= 2):
+        players[player].add_score(sumDice,(num-1))
+    else:
+        for i in range(0,2):
+            if players[player].unfill_sheet(i):
+                sumDiceTwo = 0
+                for j in range(0,5):
+                    if dices[j] == (i+1):
+                        sumDiceTwo += dices[j]
+                players[player].add_score(sumDiceTwo,i)
+                break
+    #num = highestScore(players[currentPlayer].sheet)
+    
+        players[player].add_score(sumDice,(num-1))
+
+
+
+
+
+for i in range(0,5):
+        dices[i] = random.randint(1,6)
+    filledList = []
+    for i in range(0,6):
+        #print(players[nextPlayer].sheet)
+        if players[player].unfill_sheet(i) == False:
+            #print(i)
+            filledList.append((i+1))
+    num, freq = most_frequent(dices, filledList)
+    for i in range(0,5):
+        if num == 0:
+            dices[i] = random.randint(1,6)
+        elif dices[i] != num:
+            dices[i] = random.randint(1,6)
+    num, freq = most_frequent(dices, filledList)
+    for i in range(0,5):
+        if num == 0:
+            dices[i] = random.randint(1,6)
+        elif dices[i] != num:
+            dices[i] = random.randint(1,6)
+    num, freq = most_frequent(dices, filledList)
+    #print(num, freq)
+    if players[player].unfill_sheet((num-1)):
+        players[player].add_score(num*freq,(num-1))
